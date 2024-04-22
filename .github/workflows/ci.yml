@@ -50,9 +50,10 @@ jobs:
         mkdir cache && cd cache && git clone https://github.com/boost-ext/ut.git
     
     - name: Build & Install Boost.ut
-      working-directory: ${{ github.workspace }}
-      run: |
-        cd cache && cmake -B build -H . && cd build && sudo make install
+      working-directory: ${{ github.workspace }}/cache
+      run: >
+        cmake -B build -H .; 
+        cd build && sudo make install
 
     - name: Configure CMake
       working-directory: ${{ github.workspace }}
