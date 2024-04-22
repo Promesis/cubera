@@ -10,6 +10,10 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 add_executable(cubera "")
 
-
-
 add_subdirectory(src)
+
+
+find_package(ut REQUIRED)
+target_link_libraries(cubera 
+    PRIVATE 
+        Boost::ut)

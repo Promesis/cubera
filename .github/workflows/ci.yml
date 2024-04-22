@@ -44,7 +44,18 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
+    - name: Clone Boost.ut
+      working-directory: ${{ github.workspace }}/cache
+      run: |
+        git clone https://github.com/boost-ext/ut.git
+    
+    - name: Build & Install Boost.ut
+      working-directory: ${{ github.workspace }}/cache/ut
+      run: |
+        cmake -B build -H . && cd build && sudo make install
+
     - name: Configure CMake
+      working-directory: ${{ github.workspace }}
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
