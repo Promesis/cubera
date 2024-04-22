@@ -45,14 +45,14 @@ jobs:
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
     - name: Clone Boost.ut
-      working-directory: ${{ github.workspace }}/cache
+      working-directory: ${{ github.workspace }}
       run: |
-        git clone https://github.com/boost-ext/ut.git
+        mkdir cache && cd cache && git clone https://github.com/boost-ext/ut.git
     
     - name: Build & Install Boost.ut
-      working-directory: ${{ github.workspace }}/cache/ut
+      working-directory: ${{ github.workspace }}
       run: |
-        cmake -B build -H . && cd build && sudo make install
+        cd cache && cmake -B build -H . && cd build && sudo make install
 
     - name: Configure CMake
       working-directory: ${{ github.workspace }}
